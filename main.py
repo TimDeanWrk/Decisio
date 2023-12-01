@@ -8,38 +8,44 @@ from users import *
 def make_descision(username):
 
         
-    so = db.get['q_one']
-    fri = db.get['q_two']
-    fam = db.get['q_three']
-    enj = db.get['q_four']
-    imp = db.get['q_five']
+    pass
    
+def reset_values(username):
+    db.lremlist('q_one')
+    db.set(username, {'q_one':[]})
+
 
 def user_survey(user):
     ans_input1 = input("Sample Question [1-5]")
     ans_one = get_ans(ans_input1)
+    print(ans_one)
     user_data = db.get(user)
     user_data['q_one'].append(ans_one)
+    db.dump()
     
     ans_input2 = input("Sample Question [1-5]")
     ans_two = get_ans(ans_input2)
     user_data = db.get(user)
     user_data['q_two'].append(ans_two)
+    db.dump()
 
     ans_input3 = input("Sample Question [1-5]")
     ans_three = get_ans(ans_input3)
     user_data = db.get(user)
     user_data['q_three'].append(ans_three)
+    db.dump()
 
     ans_input4 = input("Sample Question [1-5]")
     ans_four = get_ans(ans_input4)
     user_data = db.get(user)
     user_data['q_four'].append(ans_four)
+    db.dump()
 
     ans_input5 = input("Sample Question [1-5]")
     ans_five = get_ans(ans_input5)
     user_data = db.get(user)
     user_data['q_five'].append(ans_five)
+    db.dump()
 
     home_screen(user)
 
@@ -62,7 +68,8 @@ def home_screen(username):
             while True:
                 warn = input("Are You Sure You Want To Re-Evalute Values (Doing So Overwrites Previous Values)? [Y/N] ")
                 if warn == "Y":
-                    user_survey(username)
+                    reset_values(username)
+                    #user_survey(username)
                     break
                 elif warn == "N":
                     break

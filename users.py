@@ -57,7 +57,8 @@ def login_user(username, password):
 
     
     
-def get_ans(inp):
+def get_ans(input):
+    inp = int(input)
     if inp == 1:
         score = 20
         return score
